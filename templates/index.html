@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Face Emotion Detection</title>
+</head>
+<body>
+    <h2>Upload Your Picture</h2>
+    <form method="POST" enctype="multipart/form-data">
+        <label>Full Name:</label><br>
+        <input type="text" name="name" required><br><br>
+
+        <label>Email:</label><br>
+        <input type="email" name="email" required><br><br>
+
+        <label>Upload Image:</label><br>
+        <input type="file" name="image" accept="image/*" required><br><br>
+
+        <input type="submit" name="submit_image" value="Analyze Emotion">
+    </form>
+    {% if message %}
+        <div style="margin-top: 30px; font-size: 18px;">
+            <strong>Result:</strong> {{ message }}
+        </div>
+    {% endif %}
+    <hr>
+    <section>
+        <h2>Live Camera Emotion Detection</h2>
+        {% if not show_camera %}
+        <form method="POST">
+            <button type="submit" name="start_camera">🎥 Start Camera</button>
+        </form>
+        {% else %}
+        <form method="POST">
+            <button type="submit" name="stop_camera">🛑 Stop Camera</button>
+        </form>
+        <div style="margin-top: 20px;">
+            <img src="{{ url_for('video_feed') }}" width="640" height="480">
+        </div>
+        {% endif %}
+    </section>
+</body>
+</html>
